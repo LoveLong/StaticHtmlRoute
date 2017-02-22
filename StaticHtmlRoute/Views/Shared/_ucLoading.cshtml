@@ -1,0 +1,31 @@
+﻿<style type="text/css">
+    .loading {
+      width: 128px;
+      height: 128px;
+      margin-left: -64px;
+      margin-top: -64px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: url(../Images/loading.gif) no-repeat -50% -50%;
+    }
+</style>
+<script type="text/javascript">
+
+    //加载
+    function Loading() {
+        var loading = $("#Uc_Loading");
+        loading.modal({ backdrop: 'static', keyboard: false });
+        //loading.modal('show');
+    }
+
+    function CancelLoading() {
+        var loading = $("#Uc_Loading");
+        loading.modal('hide');
+    }
+
+</script>
+
+<div class="modal fade" id="Uc_Loading" tabindex="-1" role="dialog">
+    <div class="loading"></div>
+</div>

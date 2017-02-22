@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    
+</script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ActionName</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/ecmascript">
+        
+        $(function () {
+            $("button[name=AddPower]").click(function () {
+                Loading();
+                $.post("@Url.Action("AddPower", "Home")", null, function (result) {
+                if (result.Status != true) {
+                    StartShowWarn(null, result.Message);
+                }
+                CancelLoading();
+            });
+            });
+
+            $("button[name=CancelPower]").click(function () {
+                Loading();
+                $.post("@Url.Action("CancelPower", "Home")", null, function (result) {
+                if (result.Status != true) {
+                    StartShowWarn(null, result.Message);
+                }
+                CancelLoading();
+            });
+        });
+
+            $("button[name=AccessHtml]").click(function () {
+                var iframe = $("iframe[name=StaticHtmlIframe]");
+                iframe.attr("src", "about:black;");
+                var fileName = $("input[name=HtmlName]").val();
+                var url = "@Url.Content("~/StaticHtml/")" + fileName;
+                iframe.attr("src", url);
+            });
+        });
+        
+    
+    </script>
+</head>
+<body>
+@RenderPage("_ucLoading.cshtml")
+@RenderPage("_warnModal.cshtml")
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: auto;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">静态页面</h4>
+      </div>
+      <div class="modal-body">
+      <iframe name="StaticHtmlIframe" src="about:black;" style="width: 100%; margin: 0px; padding: 0px;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container theme-showcase" style="margin-top: 20px;">
+    <ul class="list-group">
+        <li class="list-group-item">The controller is: @ViewBag.Controller</li>
+        <li class="list-group-item">The action is: @ViewBag.Action</li>
+        <li class="list-group-item">The SessionId is: @ViewBag.SessionId</li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button name="AddPower" class="btn btn-primary" type="button">添加权限</button>
+                            <button name="CancelPower" class="btn btn-success" type="button">取消权限</button>
+                        </span>
+                        <input name="HtmlName" type="text" class="form-control" placeholder="网页" value="XXXXXX.html">
+                        <span class="input-group-btn">
+                            <button name="AccessHtml" class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal">访问</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

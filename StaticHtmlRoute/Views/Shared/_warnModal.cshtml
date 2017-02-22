@@ -1,0 +1,61 @@
+﻿<!-- 这是通用消息弹框模块 -->
+
+<!-- waitModal -->
+<div class="modal fade" id="warnModal" tabindex="-1" role="dialog" aria-labelledby="warnModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="warnModalLabel">警告</h4>
+            </div>
+            <div class="modal-body message">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default cancel" data-dismiss="modal">否</button>
+                <button type="button" class="btn btn-primary submit" data-dismiss="modal">是</button>
+                <input name="hidOptName" type="hidden"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    //全局消息框定义
+    var $warnModal = $('#warnModal');
+    var $warnModalMessage = $warnModal.find('.message');
+    var $warnModalSubmit = $warnModal.find('.submit');
+    var $warnModalCancel = $warnModal.find('.cancel');
+    var $currentOptControl = $warnModal.find("input[name='hidOptName']");
+
+    //消息通知模块状态列表
+    var WarnModalStatus = {
+    };
+
+    //设置消息通知模块当前状态
+    function SetWarnModalStatus(status) {
+        $currentOptControl.val(status);
+    }
+
+    //获取消息通知模块当前状态
+    function GetWarnModalStatus() {
+        return $currentOptControl.val();
+    }
+
+    //设置消息通知模块当前消息
+    function SetWarnModalMessage(message) {
+        $warnModalMessage.text(message);
+    }
+
+    //显示消息通知模态框
+    function ShowWarnModal() {
+        $warnModal.modal('show');
+    }
+
+    //显示消息框
+    function StartShowWarn(status, message) {
+        SetWarnModalStatus(status);
+        SetWarnModalMessage(message);
+        ShowWarnModal();
+    }
+</script>
